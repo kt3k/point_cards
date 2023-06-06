@@ -1,14 +1,22 @@
+// Copyright 2023 Yoshiya Hinosawa. All rights reserved. MIT license.
+
+import { PointCard } from "utils/model.ts";
+
 export default function PointCard(
-  { subtitle, points, max, row }: {
-    subtitle: string;
-    points: number;
-    max: number;
-    row?: number;
-  },
+  { card }: { card: PointCard },
 ) {
+  const {
+    points,
+    spec: {
+      max,
+      row,
+      subtitle,
+    },
+    issuedAt,
+  } = card;
   return (
-    <div class="mt-10 w-[340px] bg-red-100 shadow-lg rounded-lg overflow-hidden">
-      <header class="px-4 py-4 bg-red-800 flex items-center gap-2">
+    <div class="mt-10 w-[340px] bg-red-100 shadow-lg rounded-lg overflow-hidden relative">
+      <header class="px-4 py-3 bg-red-700 flex items-center gap-2">
         <img
           src="/logo.svg"
           class="w-7 h-7"
@@ -24,8 +32,16 @@ export default function PointCard(
         </span>
       </header>
       <div
-        class={`px-2 py-7 grid grid-cols-${row ?? 5} gap-5 place-items-center`}
+        class={`px-2 pt-8 pb-5 grid grid-cols-${
+          row ?? 5
+        } gap-5 place-items-center relative`}
       >
+        <div
+          class="absolute w-full top-1 px-2 text-red-800 font-thin text-right"
+          style="font-size: 11px;"
+        >
+          発行日: {issuedAt.toLocaleDateString("ja", { dateStyle: "long" })}
+        </div>
         {[...Array(points)].map((_, i) => 
         <Heart class="w-7 h-7 text-red-500" />)}
         {[...Array(max - points - 1)].map((_, i) => (
@@ -33,7 +49,7 @@ export default function PointCard(
         ))}
         <div>
           <HeartPlaceholder class="w-7 h-7 text-red-800" />
-          <span class="text-sm text-red-800 absolute">Goal</span>
+          <span class="-mt-1 text-xs text-red-800 absolute">Goal</span>
         </div>
       </div>
     </div>

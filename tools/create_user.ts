@@ -4,7 +4,7 @@
 import { createUserByIdLoginNamePw } from "utils/model.ts";
 
 function usage() {
-  console.log(`Usage: ./tools/create_user.ts <id> <login> <name> <pw>`);
+  console.log(`Usage: ./tools/create_user.ts <login> <name> <pw>`);
 }
 
 const [login, name, pw] = Deno.args;

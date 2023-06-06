@@ -3,6 +3,7 @@
 import { kv } from "utils/kv.ts";
 import { digest } from "utils/digest.ts";
 import { ulid } from "https://raw.githubusercontent.com/kt3k/ulid/v0.1.0/mod.ts";
+import { getSessionById } from "./session.ts";
 
 export interface User {
   id: string;
@@ -73,6 +74,14 @@ export async function getUserByLogin(login: string) {
   return getUserById(id);
 }
 
+export async function getUserBySessionId(sessionId: string) {
+  const session = await getSessionById(sessionId);
+  if (session) {
+    return getUserById(session.userId);
+  }
+  return null;
+}
+
 export function saveUser(user: User) {
   return kv.atomic()
     .set([USER_KEY_PREFIX, user.id], user)
@@ -80,12 +89,23 @@ export function saveUser(user: User) {
     .commit();
 }
 
+export async function listUsers() {
+  const result: User[] = [];
+  for await (const res of kv.list<User>({ prefix: [USER_KEY_PREFIX] })) {
+    result.push(res.value);
+  }
+  return result;
+}
+
 // PointCard funcs
+
+const POINT_CARD_BY_HOLDER_PREFIX = "point_cards_by_holder";
+const POINT_CARD_BY_ISSUER_PREFIX = "point_cards_by_issuer";
 
 function savePointCard(card: PointCard, issuer: User, holder: User) {
   return kv.atomic()
-    .set(["point_cards_by_holder", holder.id, card.id], card)
-    .set(["point_cards_by_issuer", issuer.id, card.id], card)
+    .set([POINT_CARD_BY_HOLDER_PREFIX, holder.id, card.id], card)
+    .set([POINT_CARD_BY_ISSUER_PREFIX, issuer.id, holder.id, card.id], card)
     .commit();
 }
 
@@ -102,4 +122,31 @@ export async function issuePointCard(
   };
   await savePointCard(card, issuer, holder);
   return card;
+}
+
+export async function listPointCardsByHolderId(holderId: string) {
+  const result: PointCard[] = [];
+  for await (
+    const res of kv.list<PointCard>(
+      { prefix: [POINT_CARD_BY_HOLDER_PREFIX, holderId] },
+    )
+  ) {
+    result.push(res.value);
+  }
+  return result;
+}
+
+export async function listPointCardsByIssuerIdHolderId(
+  issuerId: string,
+  holderId: string,
+) {
+  const result: PointCard[] = [];
+  for await (
+    const res of kv.list<PointCard>(
+      { prefix: [POINT_CARD_BY_ISSUER_PREFIX, issuerId, holderId] },
+    )
+  ) {
+    result.push(res.value);
+  }
+  return result;
 }
