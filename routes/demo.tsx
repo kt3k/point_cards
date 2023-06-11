@@ -1,7 +1,9 @@
 // Copyright 2023 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { Head } from "$fresh/runtime.ts";
+import Button from "components/Button.tsx";
 import PointCard from "components/PointCard.tsx";
+import PointCardManager from "islands/PointCardManager.tsx";
 
 export default function ExampleCards() {
   return (
@@ -10,15 +12,28 @@ export default function ExampleCards() {
         <title>Iyochi's point card</title>
       </Head>
       <div class="flex flex-col items-center bg-red-50 min-h-[100vh]">
-        <PointCard
+        <PointCardManager
+          class="mt-5"
           card={{
             id: "",
-            points: 4,
+            points: 6,
             spec: { max: 10, subtitle: "Rank 1" },
             issuedAt: new Date("2022-01-01"),
           }}
+          holderName="パパ👨"
+        />
+        <PointCardManager
+          class="mt-5"
+          card={{
+            id: "",
+            points: 3,
+            spec: { max: 10, subtitle: "Rank 1" },
+            issuedAt: new Date("2022-01-01"),
+          }}
+          holderName="レイレイ👶"
         />
         <PointCard
+          class="mt-4"
           card={{
             id: "",
             points: 7,
@@ -27,6 +42,7 @@ export default function ExampleCards() {
           }}
         />
         <PointCard
+          class="mt-4"
           card={{
             id: "",
             points: 7,
@@ -35,6 +51,7 @@ export default function ExampleCards() {
           }}
         />
         <PointCard
+          class="mt-4"
           card={{
             id: "",
             points: 7,

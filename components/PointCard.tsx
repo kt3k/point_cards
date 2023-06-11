@@ -3,8 +3,9 @@
 import { PointCard } from "utils/model.ts";
 
 export default function PointCard(
-  { card }: { card: PointCard },
+  props: { card: PointCard; class?: string },
 ) {
+  const { card } = props;
   const {
     points,
     spec: {
@@ -15,7 +16,10 @@ export default function PointCard(
     issuedAt,
   } = card;
   return (
-    <div class="mt-10 w-[340px] bg-red-100 shadow-lg rounded-lg overflow-hidden relative">
+    <div
+      class={"w-[340px] bg-red-100 shadow-lg rounded-lg overflow-hidden relative " +
+          props.class ?? ""}
+    >
       <header class="px-4 py-3 bg-red-700 flex items-center gap-2">
         <img
           src="/logo.svg"
