@@ -44,7 +44,8 @@ export default function PointCard(
           class="absolute w-full top-1 px-2 text-red-800 font-thin text-right"
           style="font-size: 11px;"
         >
-          発行日: {issuedAt.toLocaleDateString("ja", { dateStyle: "long" })}
+          発行日:{" "}
+          {new Date(issuedAt).toLocaleDateString("ja", { dateStyle: "long" })}
         </div>
         {[...Array(points)].map((_, i) => 
         <Heart class="w-7 h-7 text-red-500" />)}

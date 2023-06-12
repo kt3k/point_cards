@@ -14,8 +14,8 @@ export default function PointCardManager(
     >
       <PointCard card={props.card} />
       <div class="-mt-6 pt-6 pb-4 px-4 mx-4 rounded-lg shadow bg-gray-100">
-        <p class="mt-4">所有者: {props.holderName}</p>
-        <p class="mt-4">
+        <p class="mt-4 text-gray-500">所有者: {props.holderName}</p>
+        <p class="mt-4 text-gray-500">
           ポイント付与 <Button style="red">+1</Button>
           <Button style="red">+2</Button>
           <Button style="red">+3</Button>

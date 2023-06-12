@@ -39,13 +39,13 @@ export default function PointCardIssueControl(
   };
   return (
     <div class="mt-5 rounded-lg bg-gray-100 shadow p-6">
-      <header class="font-medium">
+      <header class="font-medium text-gray-700">
         ポイントカード発行
       </header>
       <p class="mt-4 flex gap-2 items-center">
         <input
           onChange={(e) => setSubtitle(e.currentTarget.value)}
-          class="px-2 py-1 rounded"
+          class="px-2 py-1 rounded text-gray-700"
           placeholder="Rank 1"
           value={subtitle}
         />
@@ -53,7 +53,7 @@ export default function PointCardIssueControl(
           カードの右上に<br />表示されます
         </span>
       </p>
-      <p class="mt-3">
+      <p class="mt-3 text-gray-500">
         所有者
         <span class="ml-2">{props.holder.name}</span>
         <Button

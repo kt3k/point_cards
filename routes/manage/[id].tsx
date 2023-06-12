@@ -4,9 +4,9 @@ import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { getCookies } from "std/http/cookie.ts";
 import {
+  getUserById,
   getUserBySessionId,
   listPointCardsByIssuerIdHolderId,
-  listUsers,
   PointCard,
   User,
 } from "utils/model.ts";
@@ -29,15 +29,13 @@ export const handler: Handlers = {
     if (!user) {
       return redirectToTop();
     }
-    const users = (await listUsers()).filter((u) => u.id !== user.id);
-    const holder = users.find((u) => u.id === holderId);
+    const holder = await getUserById(holderId);
     if (!holder) {
       return redirectToTop();
     }
     return ctx.render({
       user,
       holder,
-      users,
       pointCards: await listPointCardsByIssuerIdHolderId(
         user.id,
         holder.id,
@@ -50,7 +48,7 @@ export default function Home(
     { user: User; holder: User; users: User[]; pointCards: PointCard[] }
   >,
 ) {
-  const { holder, users, pointCards } = props.data;
+  const { holder, pointCards } = props.data;
 
   return (
     <>
@@ -59,7 +57,9 @@ export default function Home(
       </Head>
       <Main>
         <div class="mt-5 font-thin text-xl text-red-600">
-          <span style="font-family: 'Comic Sans MS'">iyochi's</span>{" "}
+          <span class="font-bold" style="font-family: 'Comic Sans MS'">
+            iyochi's
+          </span>{" "}
           ポイントカード管理
         </div>
         <p class="mt-5">
@@ -75,7 +75,7 @@ export default function Home(
           holder={holder}
         />
         <div class="mt-10 rounded">
-          <header class="font-medium">
+          <header class="font-medium text-gray-700">
             発行済みポイントカード ({pointCards.length})
           </header>
           <p class="mt-4 ">

@@ -41,14 +41,16 @@ export default function Home(props: PageProps<{ user?: User; users: User[] }>) {
       </Head>
       <Main>
         <div class="mt-5 font-thin text-xl text-red-600">
-          <span style="font-family: 'Comic Sans MS'">iyochi's</span>{" "}
+          <span class="font-bold" style="font-family: 'Comic Sans MS'">
+            iyochi's
+          </span>{" "}
           ポイントカード管理
         </div>
         <div class="mt-5">
-          <header class="font-medium">カード所有者選択</header>
+          <header class="font-medium text-gray-700">カード所有者選択</header>
           {users.map((u) => (
             <a href={"/manage/" + u.id}>
-              <p class="mt-3 w-full text-center rounded-lg shadow bg-gray-100 py-1">
+              <p class="mt-3 w-full text-center rounded-lg shadow text-gray-500 bg-gray-100 py-1">
                 {u.name}
               </p>
             </a>
