@@ -22,8 +22,8 @@ export default function PointCard(
     >
       <header class="px-4 py-3 bg-red-700 flex items-center gap-2">
         <img
-          src="/logo.svg"
-          class="w-7 h-7"
+          src="/14logo.svg"
+          class="w-7 h-7 rounded-full bg-red-50 border border-red-200"
         />
         <span
           class="text-lg font-bold text-red-100"

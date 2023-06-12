@@ -1,9 +1,10 @@
 // Copyright 2023 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { Head } from "$fresh/runtime.ts";
-import Button from "components/Button.tsx";
 import PointCard from "components/PointCard.tsx";
 import PointCardManager from "islands/PointCardManager.tsx";
+import { Main } from "components/Containers.tsx";
+import Footer from "components/Footer.tsx";
 
 export default function ExampleCards() {
   return (
@@ -11,7 +12,7 @@ export default function ExampleCards() {
       <Head>
         <title>Iyochi's point card</title>
       </Head>
-      <div class="flex flex-col items-center bg-red-50 min-h-[100vh]">
+      <Main>
         <PointCardManager
           class="mt-5"
           card={{
@@ -59,7 +60,7 @@ export default function ExampleCards() {
             issuedAt: new Date("2022-02-01"),
           }}
         />
-      </div>
+      </Main>
     </>
   );
 }

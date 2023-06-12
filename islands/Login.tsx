@@ -26,6 +26,13 @@ export default function Login(props: { class?: string }) {
   };
   return (
     <div class={props.class}>
+      <header class="text-center pb-10">
+        <img
+          src="/14logo.svg"
+          class="w-20 h-20 inline rounded-full bg-red-50 border border-red-200"
+        />
+        <p class="mt-5">Iyochi's ポイントカード</p>
+      </header>
       <p>
         <input
           class="w-full px-2 py-1 rounded border"
