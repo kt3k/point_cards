@@ -78,13 +78,16 @@ export default function Home(
           <header class="font-medium text-gray-700">
             発行済みポイントカード ({pointCards.length})
           </header>
-          <p class="mt-4 ">
+          <p class="mt-4">
             {pointCards.map((card) => (
-              <PointCardManager
-                class="mt-5"
-                card={card}
-                holderName={holder.name}
-              />
+              <div>
+                <PointCardManager
+                  key={card.id}
+                  class="mt-5"
+                  card={card}
+                  holderName={holder.name}
+                />
+              </div>
             ))}
           </p>
         </div>
