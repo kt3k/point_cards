@@ -15,6 +15,7 @@ export const handler: Handlers = {
     const spec = body.spec;
     const { session } = getCookies(req.headers);
     const user = await getUserBySessionId(session);
+    console.log("Issue");
     if (!user) {
       return new Response("{}", { status: 401 });
     }

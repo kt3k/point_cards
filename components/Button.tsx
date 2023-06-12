@@ -4,8 +4,8 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 export default function Button(
   props: JSX.HTMLAttributes<HTMLButtonElement> & { style?: string },
 ) {
-  let cls = "m-1 py-0.5 px-4 rounded font-semibold " +
-    (props.class ?? "");
+  let cls = "m-1 py-0.5 px-4 rounded-lg shadow font-semibold " +
+    (props.class ?? "") + " ";
   if (props.style === "red") {
     cls += "bg-red-600 text-white ";
   } else {

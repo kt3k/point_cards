@@ -8,13 +8,19 @@ export default function PointCardManager(
   props: { class?: string; card: PointCardModel; holderName: string },
 ) {
   return (
-    <div class={"p-6 rounded shadow bg-gray-100 " + (props.class ?? "")}>
+    <div
+      class={"" +
+        (props.class ?? "")}
+    >
       <PointCard card={props.card} />
-      <p class="mt-4">所有者: {props.holderName}</p>
-      <p class="mt-4">
-        <Button style="red">ポイント付与 +1</Button>
-        <Button style="red">ポイント付与 +2</Button>
-      </p>
+      <div class="-mt-6 pt-6 pb-4 px-4 mx-4 rounded-lg shadow bg-gray-100">
+        <p class="mt-4">所有者: {props.holderName}</p>
+        <p class="mt-4">
+          ポイント付与 <Button style="red">+1</Button>
+          <Button style="red">+2</Button>
+          <Button style="red">+3</Button>
+        </p>
+      </div>
     </div>
   );
 }

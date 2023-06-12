@@ -17,7 +17,7 @@ export default function PointCard(
   } = card;
   return (
     <div
-      class={"w-[340px] bg-red-100 shadow-lg rounded-lg overflow-hidden relative " +
+      class={"w-full bg-red-100 shadow-lg rounded-lg border border-red-700 overflow-hidden relative " +
           props.class ?? ""}
     >
       <header class="px-4 py-3 bg-red-700 flex items-center gap-2">

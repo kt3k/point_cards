@@ -140,10 +140,25 @@ export async function listPointCardsByIssuerIdHolderId(
   issuerId: string,
   holderId: string,
 ) {
+  console.log([POINT_CARD_BY_ISSUER_PREFIX, issuerId, holderId]);
   const result: PointCard[] = [];
   for await (
     const res of kv.list<PointCard>(
       { prefix: [POINT_CARD_BY_ISSUER_PREFIX, issuerId, holderId] },
+    )
+  ) {
+    console.log(res);
+    result.push(res.value);
+  }
+  return result;
+}
+export async function listPointCardsByIssuerId(
+  issuerId: string,
+) {
+  const result: PointCard[] = [];
+  for await (
+    const res of kv.list<PointCard>(
+      { prefix: [POINT_CARD_BY_ISSUER_PREFIX, issuerId] },
     )
   ) {
     result.push(res.value);

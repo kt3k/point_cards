@@ -8,8 +8,10 @@ import * as $1 from "./routes/api/issue.ts";
 import * as $2 from "./routes/api/login.ts";
 import * as $3 from "./routes/demo.tsx";
 import * as $4 from "./routes/index.tsx";
+import * as $5 from "./routes/manage/[id].tsx";
 import * as $$0 from "./islands/Login.tsx";
-import * as $$1 from "./islands/PointCardManager.tsx";
+import * as $$1 from "./islands/PointCardIssueControl.tsx";
+import * as $$2 from "./islands/PointCardManager.tsx";
 
 const manifest = {
   routes: {
@@ -18,10 +20,12 @@ const manifest = {
     "./routes/api/login.ts": $2,
     "./routes/demo.tsx": $3,
     "./routes/index.tsx": $4,
+    "./routes/manage/[id].tsx": $5,
   },
   islands: {
     "./islands/Login.tsx": $$0,
-    "./islands/PointCardManager.tsx": $$1,
+    "./islands/PointCardIssueControl.tsx": $$1,
+    "./islands/PointCardManager.tsx": $$2,
   },
   baseUrl: import.meta.url,
   config,
