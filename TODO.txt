@@ -1,4 +1,5 @@
-- [x] consumers View (/`mypage`)
+- [x] consumers View (/mypage)
+- [ ] create user view (/api/admin_create_user.tsx)
 - [ ] activities
 - [ ] add domaindoc
 - [ ] notifications
