@@ -21,7 +21,7 @@ export default function ExampleCards() {
             spec: { max: 10, subtitle: "Rank 1" },
             issuedAt: new Date("2022-01-01"),
           }}
-          holderName="パパ👨"
+          holder={{ id: "", name: "パパ" }}
         />
         <PointCardManager
           class="mt-5"
@@ -31,7 +31,7 @@ export default function ExampleCards() {
             spec: { max: 10, subtitle: "Rank 1" },
             issuedAt: new Date("2022-01-01"),
           }}
-          holderName="レイレイ👶"
+          holder={{ id: "", name: "レイレイ" }}
         />
         <PointCard
           class="mt-4"
