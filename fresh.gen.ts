@@ -3,13 +3,14 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $0 from "./routes/api/add_points.ts";
-import * as $1 from "./routes/api/issue.ts";
-import * as $2 from "./routes/api/login.ts";
-import * as $3 from "./routes/api/logout.ts";
-import * as $4 from "./routes/demo.tsx";
-import * as $5 from "./routes/index.tsx";
-import * as $6 from "./routes/manage/[id].tsx";
-import * as $7 from "./routes/mypage.tsx";
+import * as $1 from "./routes/api/admin_create_user.ts";
+import * as $2 from "./routes/api/issue.ts";
+import * as $3 from "./routes/api/login.ts";
+import * as $4 from "./routes/api/logout.ts";
+import * as $5 from "./routes/demo.tsx";
+import * as $6 from "./routes/index.tsx";
+import * as $7 from "./routes/manage/[id].tsx";
+import * as $8 from "./routes/mypage.tsx";
 import * as $$0 from "./islands/Header.tsx";
 import * as $$1 from "./islands/Login.tsx";
 import * as $$2 from "./islands/PointCardIssueControl.tsx";
@@ -18,13 +19,14 @@ import * as $$3 from "./islands/PointCardManager.tsx";
 const manifest = {
   routes: {
     "./routes/api/add_points.ts": $0,
-    "./routes/api/issue.ts": $1,
-    "./routes/api/login.ts": $2,
-    "./routes/api/logout.ts": $3,
-    "./routes/demo.tsx": $4,
-    "./routes/index.tsx": $5,
-    "./routes/manage/[id].tsx": $6,
-    "./routes/mypage.tsx": $7,
+    "./routes/api/admin_create_user.ts": $1,
+    "./routes/api/issue.ts": $2,
+    "./routes/api/login.ts": $3,
+    "./routes/api/logout.ts": $4,
+    "./routes/demo.tsx": $5,
+    "./routes/index.tsx": $6,
+    "./routes/manage/[id].tsx": $7,
+    "./routes/mypage.tsx": $8,
   },
   islands: {
     "./islands/Header.tsx": $$0,
