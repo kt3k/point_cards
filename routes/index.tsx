@@ -8,7 +8,9 @@ import Login from "islands/Login.tsx";
 import { Main } from "components/Containers.tsx";
 import Header from "islands/Header.tsx";
 
-const admins = new Set(Deno.env.get("ADMIN")?.split(",") || []);
+const admins = new Set(
+  Deno.env.get("ADMIN")?.split(",").map((x) => x.trim()).filter(Boolean) || [],
+);
 
 export const handler: Handlers = {
   async GET(req, ctx) {
