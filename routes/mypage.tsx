@@ -47,6 +47,11 @@ export default function Mypage(props: Props) {
         <Header />
         <div class="mt-5">
           {cards.map((card) => <PointCardUi card={card} />)}
+          {cards.length === 0 && (
+            <p class="text-center text-gray-500">
+              ここにポイントカードが表示されます
+            </p>
+          )}
         </div>
       </Main>
     </>
