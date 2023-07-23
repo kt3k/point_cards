@@ -13,12 +13,19 @@ import {
 import PointCardIssueControl from "islands/PointCardIssueControl.tsx";
 import PointCardManager from "islands/PointCardManager.tsx";
 import { Main } from "components/Containers.tsx";
+import Header from "islands/Header.tsx";
 
 function redirectToTop() {
   return new Response("", { status: 302, headers: { "Location": `/` } });
 }
 
-export const handler: Handlers = {
+type State = {
+  user: Pick<User, "id" | "name">;
+  holder: Pick<User, "id" | "name">;
+  pointCards: PointCard[];
+};
+
+export const handler: Handlers<State> = {
   async GET(req, ctx) {
     const { session } = getCookies(req.headers);
     if (!session) {
@@ -43,11 +50,7 @@ export const handler: Handlers = {
     });
   },
 };
-export default function Home(
-  props: PageProps<
-    { user: User; holder: User; users: User[]; pointCards: PointCard[] }
-  >,
-) {
+export default function Home(props: PageProps<State>) {
   const { holder, pointCards } = props.data;
 
   return (
@@ -56,12 +59,7 @@ export default function Home(
         <title>Iyochi's point card</title>
       </Head>
       <Main>
-        <div class="mt-5 font-thin text-xl text-red-600">
-          <span class="font-bold" style="font-family: 'Comic Sans MS'">
-            iyochi's
-          </span>{" "}
-          ポイントカード管理
-        </div>
+        <Header />
         <p class="mt-5">
           <a
             href="/"
@@ -85,7 +83,7 @@ export default function Home(
                   key={card.id}
                   class="mt-5"
                   card={card}
-                  holderName={holder.name}
+                  holder={holder}
                 />
               </div>
             ))}

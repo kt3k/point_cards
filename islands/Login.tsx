@@ -31,7 +31,7 @@ export default function Login(props: { class?: string }) {
           src="/14logo.svg"
           class="w-20 h-20 inline rounded-full bg-red-50 border border-red-200"
         />
-        <p class="mt-5">Iyochi's ポイントカード</p>
+        <p class="mt-5 text-gray-500">Iyochi's ポイントカード</p>
       </header>
       <p>
         <input

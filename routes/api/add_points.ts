@@ -1,18 +1,17 @@
 // Copyright 2023 Yoshiya Hinosawa. All rights reserved. MIT license.
 
 import { Handlers } from "$fresh/server.ts";
-import {
-  getUserById,
-  getUserBySessionId,
-  issuePointCard,
-} from "utils/model.ts";
+import { addPoint, getUserById, getUserBySessionId } from "utils/model.ts";
 import { getCookies } from "std/http/cookie.ts";
 
 export const handler: Handlers = {
-  async POST(req, _) {
-    const body = await req.json();
+  async PATCH(req, _) {
+    const text = await req.text();
+    console.log(text);
+    const body = JSON.parse(text);
     const holderId = body.holderId;
-    const spec = body.spec;
+    const cardId = body.cardId;
+    const points = body.points;
     const { session } = getCookies(req.headers);
     const user = await getUserBySessionId(session);
     if (!user) {
@@ -22,7 +21,11 @@ export const handler: Handlers = {
     if (!holder) {
       return new Response("{}", { status: 401 });
     }
-    const card = await issuePointCard(spec, user, holder);
-    return Response.json(card);
+    try {
+      const card = await addPoint(cardId, points, user, holder);
+      return Response.json(card);
+    } catch (e) {
+      return new Response(e.message, { status: 400 });
+    }
   },
 };

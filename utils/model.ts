@@ -109,6 +109,39 @@ function savePointCard(card: PointCard, issuer: User, holder: User) {
     .commit();
 }
 
+export async function addPoint(
+  cardId: string,
+  points: number,
+  issuer: User,
+  holder: User,
+) {
+  const get0 = kv.get<PointCard>([
+    POINT_CARD_BY_HOLDER_PREFIX,
+    holder.id,
+    cardId,
+  ]);
+  const get1 = kv.get<PointCard>([
+    POINT_CARD_BY_ISSUER_PREFIX,
+    issuer.id,
+    holder.id,
+    cardId,
+  ]);
+  const [res0, res1] = await Promise.all([get0, get1]);
+  const newCard = res0.value;
+  if (!newCard) {
+    throw new Error("Card not found");
+  }
+  if (newCard.points + points > newCard.spec.max) {
+    throw new Error("Point overflow");
+  }
+  newCard.points += points;
+  await kv.atomic().check(res0).check(res1)
+    .set([POINT_CARD_BY_HOLDER_PREFIX, holder.id, cardId], newCard)
+    .set([POINT_CARD_BY_ISSUER_PREFIX, issuer.id, holder.id, cardId], newCard)
+    .commit();
+  return newCard;
+}
+
 export async function issuePointCard(
   spec: PointCardSpec,
   issuer: User,
@@ -148,18 +181,5 @@ export async function listPointCardsByIssuerIdHolderId(
   ) {
     result.push(res.value);
   }
-  return result;
-}
-export async function listPointCardsByIssuerId(
-  issuerId: string,
-) {
-  const result: PointCard[] = [];
-  for await (
-    const res of kv.list<PointCard>(
-      { prefix: [POINT_CARD_BY_ISSUER_PREFIX, issuerId] },
-    )
-  ) {
-    result.push(res.value);
-  }
-  return result;
+  return result.toReversed();
 }

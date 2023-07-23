@@ -6,6 +6,7 @@ import { getCookies } from "std/http/cookie.ts";
 import { getUserBySessionId, listUsers, User } from "utils/model.ts";
 import Login from "islands/Login.tsx";
 import { Main } from "components/Containers.tsx";
+import Header from "islands/Header.tsx";
 
 export const handler: Handlers = {
   async GET(req, ctx) {
@@ -40,12 +41,7 @@ export default function Home(props: PageProps<{ user?: User; users: User[] }>) {
         <title>Iyochi's point card</title>
       </Head>
       <Main>
-        <div class="mt-5 font-thin text-xl text-red-600">
-          <span class="font-bold" style="font-family: 'Comic Sans MS'">
-            iyochi's
-          </span>{" "}
-          ポイントカード管理
-        </div>
+        <Header />
         <div class="mt-5">
           <header class="font-medium text-gray-700">カード所有者選択</header>
           {users.map((u) => (

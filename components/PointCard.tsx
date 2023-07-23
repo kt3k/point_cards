@@ -15,6 +15,7 @@ export default function PointCard(
     },
     issuedAt,
   } = card;
+  const isGoal = max <= points;
   return (
     <div
       class={"w-full bg-red-100 shadow-lg rounded-lg border border-red-700 overflow-hidden relative " +
@@ -47,13 +48,17 @@ export default function PointCard(
           発行日:{" "}
           {new Date(issuedAt).toLocaleDateString("ja", { dateStyle: "long" })}
         </div>
-        {[...Array(points)].map((_, i) => 
-        <Heart class="w-7 h-7 text-red-500" />)}
-        {[...Array(max - points - 1)].map((_, i) => (
-          <HeartPlaceholder class="w-7 h-7 text-red-800" />
+        {[...Array(Math.min(points, max - 1))].map((_, i) => (
+          <Heart class="w-7 h-7 text-red-500" />
         ))}
+        {max > points &&
+          [...Array(max - points - 1)].map((_, i) => (
+            <HeartPlaceholder class="w-7 h-7 text-red-800" />
+          ))}
         <div>
-          <HeartPlaceholder class="w-7 h-7 text-red-800" />
+          {isGoal
+            ? <Heart class="w-7 h-7 text-red-500" />
+            : <HeartPlaceholder class="w-7 h-7 text-red-800" />}
           <span class="-mt-1 text-xs text-red-800 absolute">Goal</span>
         </div>
       </div>
