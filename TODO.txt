@@ -1,0 +1,4 @@
+- [x] consumers View (/`mypage`)
+- [ ] activities
+- [ ] add domaindoc
+- [ ] notifications

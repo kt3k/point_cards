@@ -8,17 +8,26 @@ import Login from "islands/Login.tsx";
 import { Main } from "components/Containers.tsx";
 import Header from "islands/Header.tsx";
 
+const admins = new Set(Deno.env.get("ADMIN")?.split(",") || []);
+
 export const handler: Handlers = {
   async GET(req, ctx) {
     const { session } = getCookies(req.headers);
     if (session) {
       const user = await getUserBySessionId(session);
       if (user) {
-        const users = (await listUsers()).filter((u) => u.id !== user.id);
-        return ctx.render({
-          user,
-          users,
-        });
+        if (admins.has(user.login)) {
+          if (user) {
+            const users = (await listUsers()).filter((u) => u.id !== user.id);
+            return ctx.render({
+              user,
+              users,
+            });
+          }
+        }
+        return Response.redirect(
+          Object.assign(new URL(req.url), { pathname: "/mypage" }),
+        );
       }
     }
     return ctx.render({});
