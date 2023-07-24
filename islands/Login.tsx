@@ -42,6 +42,7 @@ export default function Login(props: { class?: string }) {
       </p>
       <p>
         <input
+          type="password"
           class="mt-2 w-full px-2 py-1 rounded border"
           onInput={(e) => setPw(e.currentTarget.value)}
           placeholder="パスワード"
